@@ -1,0 +1,64 @@
+Database setup
+Year -> Team -> Roster -> Stats
+
+These are all the tables for this
+myteams <- yearly data for teams and thier values
+myplayers <- for
+
+
+Team: Primary
+	TeamID: U
+
+Team Stats: Secondary
+	TeamID: Multi
+	Team Name:
+	Year:
+	Rank:
+	...
+
+Player Roster: Primary
+	-Player ID:
+	-Pos
+	-Age
+	-Ht
+	-Wt
+	-Handedness
+	-Exp
+	-Birthdate
+
+Player: Secondary
+	PlayerID: Multi
+	TeamID: Multi
+	Player Name:
+	Team Name:
+	Year:
+	Team:
+
+
+
+
+
+	'''
+east <- readHTMLTable(top.urls[2], which = 1)
+west <- readHTMLTable(top.urls[2], which = 2)
+east$DIV <- "East"
+west$DIV <- "West"
+
+teams <- as.data.frame(rbind(east, west))
+teams <- teams[complete.cases(teams),]
+names(teams)[1] <- "Team_Name"
+teams$Team_Name <- gsub("\\*", "", teams$Team_Name)
+teams
+'''
+
+
+
+'''
+yearly.url <- paste0("http://www.hockey-reference.com/leagues/NHL_", years.list ,".html")
+doc <- htmlParse(yearly.url[1])
+links <- xpathSApply(doc, "//a/@href")
+m <- glob2rx(paste0("/teams/*/", years.list[1], "*"))
+teams.links <- unique(subset(links, grepl(m, links)))
+fteams.links <- paste0(base, teams.links)
+fteams.links
+'''
